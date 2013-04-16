@@ -25,22 +25,4 @@
             <version>1.0.0.0</version>
         </Nls_Whoops>
     </modules>
-    <global>
-       <models>
-        <whoops>
-            <class>Nls_Whoops_Model</class>
-        </whoops>
-       </models>
-       <events>
-            <controller_front_init_before>
-                <observers>
-                    <nls_whoops_observer>
-                        <type>singleton</type>
-                        <class>whoops/observer</class>
-                        <method>add_errorhandler</method>
-                    </nls_whoops_observer>
-                </observers>
-            </controller_front_init_before>
-        </events>
-    </global>
 </config>

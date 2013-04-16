@@ -62,12 +62,16 @@ class Inspector
     {
         if($this->framesIterator === null) {
             $frames     = $this->exception->getTrace();
-
             // If we're handling an ErrorException thrown by Whoops,
             // get rid of the last, which matches the handleError method,
             // and do not add the current exception to trace. We ensure that
             // the next frame does have a filename / linenumber, though.
             if($this->exception instanceof ErrorException && empty($frames[1]['line'])) {
+                if($frames[1]['function'] == "handleShutdown") {
+                    $frames[0]['file'] = $frames[0]['args'][2];
+                    $frames[0]['line'] = $frames[0]['args'][3];
+                    $frames[0]['type'] = $frames[0]['args'][0];
+                }
                 $frames[1] = $frames[1] + $frames[0];
                 array_shift($frames);
             } else {
